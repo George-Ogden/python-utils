@@ -26,6 +26,9 @@ class TestCaseSample(NamedTuple):
         return cls(float("nan"), False)
 
 
+TestCaseSample.__test__ = False  # type: ignore[attr-defined]
+
+
 @pytest.mark.parametrize("case", TestCaseSample.cases())
 def test_test_case_sample_cases(case: TestCaseSample) -> None:
     assert isinstance(case, TestCaseSample)

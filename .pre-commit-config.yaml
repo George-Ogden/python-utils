@@ -18,6 +18,7 @@ repos:
     hooks:
       - id: no-commit-to-branch
         fail_fast: true
+        args: [-b, m]
       - id: end-of-file-fixer
         stages: [pre-commit]
       - id: mixed-line-ending

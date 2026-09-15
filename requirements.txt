@@ -1,2 +1,2 @@
 extra-type-helpers
-typing_extensions; python_version < "3.13"
+typing_extensions >= 4.16; python_version < "3.15"
