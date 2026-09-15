@@ -1,3 +1,4 @@
+# ruff: file-ignore[unnecessary-lambda]
 from . import compose
 
 # Note: some of these tests are written with explicit functions due to Mypy errors.
