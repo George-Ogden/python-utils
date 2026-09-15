@@ -1,10 +1,25 @@
 from collections.abc import Callable
-from typing import TYPE_CHECKING, Any, assert_type
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Self, assert_type
+from unittest import mock
 
 import pytest
 
+from utils.test_utils import check_for_errors
+
 from .identity import identity
 from .min_max import min_max
+
+if TYPE_CHECKING:
+    from mypy_pytest_plugin_types.mock import Mock
+
+
+@dataclass(frozen=True)
+class WeirdCmp:
+    x: int
+
+    def __lt__(self, other: Self) -> bool:
+        return (other.x - self.x) % 3 == 1
 
 
 @pytest.mark.parametrize(
@@ -25,6 +40,35 @@ def test_min_max(a: Any, b: Any, key: Callable[[Any], Any] | None, swap: bool) -
         assert min_max(a, b, key=key) == (b, a)
     else:
         assert min_max(a, b, key=key) == (a, b)
+
+
+@pytest.mark.parametrize(
+    "it, key, expected",
+    [
+        ([], None, ValueError),
+        (None, None, TypeError),
+        ([1, 2, 3], None, (1, 3)),
+        ([1, 4, 6, 8, -5, 4, 3], None, (-5, 8)),
+        ([1, 4, 6, 8, 5, 4, 3], lambda x: x % 2, (4, 1)),
+        ([0, 1, 2], WeirdCmp, AssertionError),
+        ([5, 8, 3, 4, 1, 9], lambda x: x >= 5, (3, 5)),
+        ([0], None, (0, 0)),
+    ],
+)
+def test_min_max_iterable(
+    it: Any, key: Callable[[Any], Any] | None, expected: tuple[Any, Any] | type[Exception]
+) -> None:
+    with check_for_errors(expected):
+        assert min_max(it, key=key) == expected
+
+
+@pytest.mark.typed
+def test_min_max_iterable_correct_calls() -> None:
+    if TYPE_CHECKING:
+        m: Mock[[int], int]
+    m = mock.Mock(return_value=0)
+    assert min_max([5, 4, 3], key=m) == (5, 5)
+    assert m.call_count == 3
 
 
 @pytest.mark.typed
