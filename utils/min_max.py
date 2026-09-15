@@ -36,10 +36,12 @@ def min_max(
     a: Any, b: Any = _MISSING, /, *, key: Callable[[Any], Any] | None = None
 ) -> tuple[Any, Any]:
     """
-    Return the min and the max of two items as a tuple.
+    Return the min and the max of two items or an iterable as a tuple.
     The first item in the min and the second is the max.
     It is also possible to specify a key which is used for comparison.
-    In the case of a tie, the original order is maintained.
+    In the case of a tie in a pair, the original order is maintained.
+    In the case of a tie in an iterable, the first item is returned.
+    If the iterable is empty, a `ValueError` is raised.
     For example:
     ```python
     >>> from utils import min_max
@@ -52,6 +54,14 @@ def min_max(
     (10, 5)
     >>> min_max("gfed", "cba", key=lambda _: 0)
     ('cfed', 'cba')
+    >>> min_max(range(100))
+    (0, 99)
+    >>> min_max([1, 5, 6, 4, 3], key=lambda x: x % 5)
+    (5, 4)
+    >>> min_max("abcedf", key=lambda _: True)  # All items are considered equal.
+    ('a', 'a')
+    >>> min_max([])  # empty
+    ValueError: Cannot find min/max of an empty iterable.
     ```
     """
     if b is _MISSING:
