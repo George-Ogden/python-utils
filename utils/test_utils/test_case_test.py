@@ -153,7 +153,7 @@ class CasesOverride(NamedTuple):
 
 
 @pytest.mark.typed
-def test_cases_overriden() -> None:
+def test_cases_overridden() -> None:
     params = CasesOverride.cases()
     assert params == list(range(1, 6))
 
