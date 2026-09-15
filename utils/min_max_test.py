@@ -95,3 +95,28 @@ def test_min_max_type_hints_with_key() -> None:
         min_max(a, b)  # type: ignore
         min_max(a, b, key=identity)  # type: ignore
         min_max(a, b, len)  # type:ignore
+
+
+@pytest.mark.typed
+def test_min_max_iterable_type_hints_without_key() -> None:
+    letters = "abracadabra"
+
+    assert_type(min_max(letters), tuple[str, str])
+    assert_type(min_max(letters, key=None), tuple[str, str])
+    assert_type(min_max(letters, key=len), tuple[str, str])
+
+    if TYPE_CHECKING:
+        min_max(letters, key=set.__len__)  # type: ignore
+        min_max(letters, key=dict.fromkeys)  # type: ignore
+
+
+@pytest.mark.typed
+def test_min_max_type_iterable_hints_with_key() -> None:
+    iter = [{3: "c", 4: "d", 5: "e"}, {3: "c", 4: "d"}]
+    assert_type(min_max(iter, key=len), tuple[dict[int, str], dict[int, str]])
+
+    if TYPE_CHECKING:
+        min_max(iter, key=None)  # type: ignore
+        min_max(iter)  # type: ignore
+        min_max(iter, key=identity)  # type: ignore
+        min_max(iter, len)  # type:ignore
