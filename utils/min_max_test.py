@@ -1,3 +1,4 @@
+# ruff: file-ignore[blanket-type-ignore]
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Self, assert_type

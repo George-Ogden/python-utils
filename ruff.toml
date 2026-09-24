@@ -1,4 +1,5 @@
 line-length = 100
+src = ["."]
 
 [format]
 quote-style = "double"
@@ -14,6 +15,7 @@ extend-select = [
   "I",   # isort
   "ISC", # flake8-implicit-str-concat
   "N",   # pep8-naming
+  "PGH", # pygrep-hooks
   "PT",  # flake8-pytest-style
   "PYI", # flake8-pyi
   "RET", # flake8-return

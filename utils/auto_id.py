@@ -30,7 +30,7 @@ class AutoId(Generic[T]):
         Transforms the current id to the next one.
         The default is to increment it.
         """
-        return id + 1  # type:ignore
+        return id + 1  # type: ignore[operator,return-value]
 
     @classmethod
     def next_id(cls) -> T:
