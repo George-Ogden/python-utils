@@ -16,22 +16,26 @@ class Box[T]:
     value: T
 
     @overload
-    def __init__(self, value: T) -> None: ...
+    def __init__(self, value: T) -> None:
+        """Initialize a `Box` with a value."""
 
     @overload
-    def __init__[U](self: Box[U | None]) -> None: ...
+    def __init__[U](self: Box[U | None]) -> None:
+        """Initialize a `Box` with a default value of `None`."""
 
     def __init__(self, value: T | None = None) -> None:
         self.value = cast(T, value)
 
     def get(self) -> T:
+        """Read the value."""
         return self.value
 
     def set(self, value: T) -> None:
+        """Update the value."""
         self.value = value
 
     def is_none(self) -> bool:
-        """Check whether the value is None."""
+        """Check whether the value is `None`."""
         return self.value is None
 
     def __bool__(self) -> bool:
