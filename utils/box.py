@@ -1,0 +1,28 @@
+from __future__ import annotations
+
+from typing import cast, overload
+
+
+class Box[T]:
+    @overload
+    def __init__(self, value: T) -> None: ...
+
+    @overload
+    def __init__[U](self: Box[U | None]) -> None: ...
+
+    def __init__(self, value: T | None = None) -> None:
+        self.value = cast(T, value)
+
+    def get(self) -> T:
+        return self.value
+
+    def set(self, value: T) -> None:
+        self.value = value
+
+    def is_none(self) -> bool:
+        """Check whether the value is None."""
+        return self.value is None
+
+    def __bool__(self) -> bool:
+        """Check whether the value is truthy."""
+        return bool(self.value)
