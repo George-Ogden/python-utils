@@ -55,7 +55,7 @@ repos:
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.16.7
+    rev: v0.16.8
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -63,7 +63,7 @@ repos:
         args: [--config, format.skip-magic-trailing-comma = true]
 
   - repo: https://github.com/rbubley/mirrors-prettier/
-    rev: v3.9.6
+    rev: v3.9.9
     hooks:
       - id: prettier
         exclude: ^docs/

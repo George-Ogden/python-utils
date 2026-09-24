@@ -10,4 +10,4 @@ prek
 py-spy
 pytest>=9.0.0
 pytest-timeout
-ruff==0.16.7
+ruff==0.16.8
