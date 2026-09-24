@@ -6,6 +6,13 @@ from typing import cast, overload
 
 @dataclass(eq=False, slots=True, match_args=True, init=False, repr=False)
 class Box[T]:
+    """
+    Wrap a value in a `Box`.
+    The main use cases of the `Box` are interior mutability and passing values by reference.
+    `Box`es are unique by their `id` so `Box(3) != Box(3)`, but `box = Box(3); box == box`.
+    The box has multiple pass through methods to act on the underlying data.
+    """
+
     value: T
 
     @overload
@@ -32,6 +39,7 @@ class Box[T]:
         return bool(self.value)
 
     def __str__(self) -> str:
+        """Represent the value in the box."""
         return str(self.value)
 
     def __repr__(self) -> str:
