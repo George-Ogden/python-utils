@@ -1,9 +1,7 @@
 import pytest
 from pytest import Subtests
 
-from utils import unreachable
-
-from .box import Box
+from . import Box, unreachable
 
 
 @pytest.fixture
