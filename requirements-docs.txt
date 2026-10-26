@@ -1,4 +1,0 @@
--r requirements-dev.txt
-mkdocs<2
-mkdocs-material
-mkdocstrings[python]
