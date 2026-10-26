@@ -11,4 +11,6 @@ permissions:
 
 jobs:
   deploy-docs:
-    uses: George-Ogden/actions/.github/workflows/deploy-mkdocs.yaml@v4.6.4
+    uses: George-Ogden/actions/.github/workflows/deploy-mkdocs.yaml@v5.2.1
+    with:
+      python-version: "3.15"
