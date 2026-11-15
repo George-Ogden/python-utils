@@ -16,3 +16,4 @@ Install with `uv pip install georges-utils`.
 ::: utils.round
 
 ::: utils.plugins.pytest_plugin
+::: utils.plotting
