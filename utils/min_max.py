@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable
+import sys
 from typing import TYPE_CHECKING, Any, overload
 
 from extra_types.types import Unmodified
-from typing_extensions import sentinel
 
 from .identity import identity
+
+if sys.version_info < (3, 15):
+    from typing_extensions import sentinel
+
 
 if TYPE_CHECKING:
     from _typeshed import SupportsDunderLT
