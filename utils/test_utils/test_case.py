@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, final
+import typing
+from typing import TYPE_CHECKING, Protocol, Self, final
 
 import pytest
 
 if TYPE_CHECKING:
     from mypy_pytest_plugin_types import ParameterSet
+    from ty_extensions import Intersection  # type: ignore[import-not-found]
 
 
 def _marks_for(name: str) -> tuple[()] | pytest.MarkDecorator:
@@ -16,15 +18,21 @@ def _marks_for(name: str) -> tuple[()] | pytest.MarkDecorator:
 
 
 def _cases[Self: type](cls: Self) -> list[ParameterSet[Self]]:
-    return [
+    return [  # ty: ignore[invalid-explicit-return]
         pytest.param(method(), id=name, marks=_marks_for(name))
         for name, method in inspect.getmembers(cls, predicate=inspect.ismethod)
         if name != "cases" and not name.startswith("_")
     ]
 
 
+class CasesAware(Protocol):
+    def cases(self) -> list[ParameterSet[Self]]:
+        raise NotImplementedError()
+
+
 @pytest.mark.typed
-def test_case[T: type](cls: T) -> T:
+@typing.no_type_check
+def test_case[T: type](cls: T) -> Intersection[T, CasesAware]:
     """
     The `@test_case` decorator is experimental and under development.
     It adds a `cases` `classmethod`, which returns an iterable that called every other `classmethod` that didn't start with an underscore.
@@ -79,8 +87,8 @@ def test_case[T: type](cls: T) -> T:
     ```
     """
     if not hasattr(cls, "cases"):
-        cls.cases = classmethod(_cases)  # type: ignore [attr-defined]
+        cls.cases = classmethod(_cases)
     return final(cls)
 
 
-test_case.__test__ = False
+test_case.__test__ = False  # ty: ignore[missing-attribute]
