@@ -10,4 +10,6 @@ on:
 
 jobs:
   run-prek:
-    uses: George-Ogden/actions/.github/workflows/lint.yaml@v5.2.1
+    uses: George-Ogden/actions/.github/workflows/lint.yaml@v5.2.2
+    with:
+      python-version: "3.14"

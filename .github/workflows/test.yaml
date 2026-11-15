@@ -10,7 +10,7 @@ on:
 
 jobs:
   run-pytest-lowest:
-    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v5.2.1
+    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v5.2.2
     with:
       python-versions: "['3.12','3.13','3.14','3.15']"
       pytest-flags: -vv -m "not local"
