@@ -19,6 +19,12 @@ Repository = "https://github.com/George-Ogden/python-utils.git"
 [project.entry-points.pytest11]
 utils = "utils.plugins.pytest_plugin"
 
+[project.optional-dependencies]
+plotting = [
+  "kaleido>=1.5.1",
+  "plotly>=7.1.0",
+]
+
 [dependency-groups]
 dev = [
   "mirror-rorrim ; python_full_version >= '3.12'",
