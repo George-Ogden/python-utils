@@ -77,7 +77,7 @@ def manual_seed(seed: int) -> int:
     else:
         np.random.seed(seed)  # ruff: ignore[numpy-legacy-random]
     try:
-        import torch as th  # type:ignore[import-not-found]
+        import torch as th  # type:ignore[import-not-found]  # ty: ignore[import-not-found]
     except ImportError:
         ...
     else:

@@ -24,6 +24,7 @@ extend-select = [
   "UP",  # pyupgrade
   "W",  # Warning (whitespace)
   "trailing-comma-on-bare-tuple",
+  "unconventional-import-alias",
 ]
 
 ignore = [
@@ -57,3 +58,11 @@ split-on-trailing-comma = false
 
 [lint.flake8-pytest-style]
 parametrize-names-type = "csv"
+
+[lint.flake8-import-conventions.aliases]
+more_itertools = "mit"
+numpy = "np"
+pandas = "pd"
+"plotly.express" = "px"
+"plotly.graph_objects" = "go"
+polars = "pl"

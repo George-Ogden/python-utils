@@ -10,6 +10,6 @@ on:
 
 jobs:
   run-mypy:
-    uses: George-Ogden/actions/.github/workflows/mypy.yaml@v5.2.1
+    uses: George-Ogden/actions/.github/workflows/mypy.yaml@v5.2.2
     with:
       python-version: "3.15"

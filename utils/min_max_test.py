@@ -1,7 +1,7 @@
 # ruff: file-ignore[blanket-type-ignore]
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Self, assert_type
+from typing import TYPE_CHECKING, Any, Self, assert_type, cast
 from unittest import mock
 
 import pytest
@@ -74,15 +74,15 @@ def test_min_max_iterable_correct_calls() -> None:
 
 @pytest.mark.typed
 def test_min_max_type_hints_without_key() -> None:
-    c = "abc"
-    d = "def"
+    c = cast(str, "abc")  # type: ignore[redundant-cast]
+    d = cast(str, "def")  # type: ignore[redundant-cast]
     assert_type(min_max(c, d), tuple[str, str])
     assert_type(min_max(c, d, key=None), tuple[str, str])
     assert_type(min_max(c, d, key=len), tuple[str, str])
 
     if TYPE_CHECKING:
         min_max(c, d, key=set.__len__)  # type: ignore
-        min_max(c, d, key=dict.fromkeys)  # type: ignore
+        min_max(c, d, key=dict.fromkeys)  # type: ignore[type-var]
 
 
 @pytest.mark.typed
@@ -108,7 +108,7 @@ def test_min_max_iterable_type_hints_without_key() -> None:
 
     if TYPE_CHECKING:
         min_max(letters, key=set.__len__)  # type: ignore
-        min_max(letters, key=dict.fromkeys)  # type: ignore
+        min_max(letters, key=dict.fromkeys)  # type: ignore[type-var]
 
 
 @pytest.mark.typed

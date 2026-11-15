@@ -18,7 +18,7 @@ class AutoId(Generic[T]):
     If the type parameter is changed, the `_increment_id` and `_id_default_value` methods need to be updated.
     """
 
-    _global_id: ClassVar[T] = cast(T, 0)
+    _global_id: ClassVar[T] = cast(T, 0)  # ty: ignore[invalid-type-form]
 
     def __init_subclass__(cls, **kwargs: object) -> None:
         super().__init_subclass__(**kwargs)
@@ -30,7 +30,7 @@ class AutoId(Generic[T]):
         Transforms the current id to the next one.
         The default is to increment it.
         """
-        return id + 1  # type: ignore[operator,return-value]
+        return id + 1  # type: ignore[operator,return-value]  # ty: ignore[unsupported-operator]
 
     @classmethod
     def next_id(cls) -> T:

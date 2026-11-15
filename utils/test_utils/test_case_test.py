@@ -26,7 +26,7 @@ class TestCaseSample(NamedTuple):
         return cls(float("nan"), False)
 
 
-TestCaseSample.__test__ = False  # type: ignore[attr-defined]
+TestCaseSample.__test__ = False  # type: ignore[attr-defined]  # ty: ignore[invalid-assignment]
 
 
 @pytest.mark.parametrize("case", TestCaseSample.cases())
@@ -111,7 +111,7 @@ def test_string_test_case(case: StringTestCase) -> None:
 @test_case
 class BoolTestCase(NamedTuple):
     a: bool
-    c: ClassVar[str] = "classy"  # type: ignore[valid-type]
+    c: ClassVar[str] = "classy"  # type: ignore[valid-type]  # ty: ignore[invalid-named-tuple]
 
     def inner_method(self) -> Self:
         return type(self)(False)

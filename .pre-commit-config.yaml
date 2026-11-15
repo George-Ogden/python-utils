@@ -10,10 +10,9 @@ ci:
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
-    rev: v0.4.10
+    rev: v0.4.11
     hooks:
       - id: mirror-check
-        fail_fast: true
 
   - repo: builtin
     hooks:
@@ -34,7 +33,7 @@ repos:
         args: [--assume-in-merge]
 
   - repo: https://github.com/semgrep/pre-commit/
-    rev: v1.181.1
+    rev: v1.185.0
     hooks:
       - id: semgrep
         require_serial: true
@@ -71,7 +70,7 @@ repos:
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.17.2
+    rev: v0.17.5
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -79,13 +78,13 @@ repos:
         args: [--config, format.skip-magic-trailing-comma = true]
 
   - repo: https://github.com/rbubley/mirrors-prettier/
-    rev: v3.9.10
+    rev: v3.10.1
     hooks:
       - id: prettier
         exclude: ^docs/
 
   - repo: https://github.com/tombi-toml/tombi-pre-commit/
-    rev: v1.9.5
+    rev: v1.11.2
     hooks:
       - id: tombi-format
         alias: tombi
@@ -109,9 +108,11 @@ repos:
             (?<![a-zà-öø-ÿ])[a-zà-öø-ÿ'`]+|[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'`]*|[a-zà-öø-ÿ]+'[a-zà-öø-ÿ]*|[a-zà-öø-ÿ]+(?=[_-])|[a-zà-öø-ÿ]+(?=[A-ZÀ-ÖØ-Þ])|\d+
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v4.1.1
+    rev: v5.1.0
     hooks:
       - id: absolute-imports-check
+      - id: ty-check
+        args: [--error-on-warning]
       - id: dbg-check
       - id: todo-check
         exclude: (?x)^(

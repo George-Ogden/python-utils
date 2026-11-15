@@ -23,24 +23,38 @@ rules:
     fix: |
       mit.flatten($X)
 
-  - id: more-itertools-import
-    message: Alias `more_itertools` as `mit` during import.
+  - id: empty-abstract-method
     languages:
       - python
     severity: ERROR
+    message: Fill in the body or `raise NotImplementedError()` to prevent issues in derived classes.
     patterns:
-      - pattern: import more_itertools
-      - pattern-not: import more_itertools as $X
-      - pattern-not: from more_itertools import $X
-    fix: import more_itertools as mit
+      - pattern: |
+          @abc.abstractmethod
+          def $F(...) -> ...:
+            $BODY
+      - metavariable-regex:
+          metavariable: $BODY
+          regex: ^\.\.\.$
+    fix-regex:
+      regex: \.\.\.
+      replacement: raise NotImplementedError()
 
-  - id: more-itertools-alias
-    message: Alias `more_itertools` as `mit`.
+  - id: empty-protocol-method
     languages:
       - python
     severity: ERROR
+    message: Fill in the body or `raise NotImplementedError()` to prevent issues in implementations.
     patterns:
-      - pattern: more_itertools.$X
-      - pattern-regex: '\bmore_itertools\b'
-    fix: |
-      mit
+      - pattern: |-
+          def $F(...) -> ...:
+            $BODY
+      - pattern-inside: |
+          class $X(Protocol, ...):
+            ...
+      - metavariable-regex:
+          metavariable: $BODY
+          regex: ^\.\.\.$
+    fix-regex:
+      regex: \.\.\.
+      replacement: raise NotImplementedError()
