@@ -45,6 +45,7 @@ lint = [
   "semgrep==1.185.0",
 ]
 test = [
+  "georges-utils[plotting]",
   "inline-snapshot",
   "more-itertools",
   "numpy",
@@ -76,3 +77,9 @@ linter = { git = "https://github.com/George-Ogden/linter/" }
 mirror-rorrim = { git = "https://github.com/George-Ogden/mirror-rorrim" }
 mypy-pytest-plugin = { git = "https://github.com/George-Ogden/mypy-pytest" }
 pytest-dbg = { git = "https://github.com/George-Ogden/pytest-dbg" }
+georges-utils = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+  ".",
+]

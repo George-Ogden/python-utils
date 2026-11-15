@@ -593,6 +593,7 @@ plotting = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "georges-utils", extra = ["plotting"] },
     { name = "inline-snapshot" },
     { name = "linter" },
     { name = "mirror-rorrim" },
@@ -621,6 +622,7 @@ lint = [
     { name = "semgrep" },
 ]
 test = [
+    { name = "georges-utils", extra = ["plotting"] },
     { name = "inline-snapshot" },
     { name = "more-itertools" },
     { name = "numpy" },
@@ -629,6 +631,7 @@ test = [
     { name = "pytest-timeout" },
 ]
 types = [
+    { name = "georges-utils", extra = ["plotting"] },
     { name = "inline-snapshot" },
     { name = "more-itertools" },
     { name = "mypy" },
@@ -651,6 +654,7 @@ provides-extras = ["plotting"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "georges-utils", extras = ["plotting"], editable = "." },
     { name = "inline-snapshot" },
     { name = "linter", git = "https://github.com/George-Ogden/linter/" },
     { name = "mirror-rorrim", marker = "python_full_version >= '3.12'", git = "https://github.com/George-Ogden/mirror-rorrim" },
@@ -679,6 +683,7 @@ lint = [
     { name = "semgrep", specifier = "==1.185.0" },
 ]
 test = [
+    { name = "georges-utils", extras = ["plotting"], editable = "." },
     { name = "inline-snapshot" },
     { name = "more-itertools" },
     { name = "numpy" },
@@ -687,6 +692,7 @@ test = [
     { name = "pytest-timeout" },
 ]
 types = [
+    { name = "georges-utils", extras = ["plotting"], editable = "." },
     { name = "inline-snapshot" },
     { name = "more-itertools" },
     { name = "mypy" },
