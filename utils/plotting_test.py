@@ -5,12 +5,12 @@ from unittest import mock
 import plotly.graph_objects as go
 import pytest
 
-from .plotting import autosave
+from .plotting import save_or_preview
 
 
 @pytest.mark.typed
-def test_autosave_no_kwargs() -> None:
-    @autosave  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
+def test_save_or_preview_no_kwargs() -> None:
+    @save_or_preview  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
     def fake_plot() -> Literal[0]:
         return 0
 
@@ -22,8 +22,8 @@ def test_autosave_no_kwargs() -> None:
 
 
 @pytest.mark.typed
-def test_autosave_to_file(tmp_path: Path) -> None:
-    @autosave
+def test_save_or_preview_to_file(tmp_path: Path) -> None:
+    @save_or_preview
     def empty_plot() -> go.Figure:
         return go.Figure(go.Scatter())
 
@@ -50,8 +50,8 @@ def test_autosave_to_file(tmp_path: Path) -> None:
 
 
 @pytest.mark.typed
-def test_autosave_show() -> None:
-    @autosave
+def test_save_or_preview_show() -> None:
+    @save_or_preview
     def mock_plot() -> go.Figure:
         return mock.Mock()  # type: ignore[return-value]
 
